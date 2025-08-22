@@ -1,0 +1,35 @@
+server:
+  port: 8080
+  tomcat:
+    threads:
+      max: 50
+spring:
+  application:
+    name: simulator
+  cache:
+    cache-names: rentData, airDna
+    caffeine:
+      spec: maximumSize=500,expireAfterWrite=6h
+  mvc:
+    problemdetails:
+      enabled: true
+
+gemini:
+  apiKey: AIzaSyBDijsVkaMa2p5TyDb9mqs72ghfFMehWJg
+app:
+  ai:
+    provider: GEMINI         # <= on choisit GEMINI
+    model: gemini-1.5-flash  # ou gemini-1.5-pro
+    temperature: 0.2
+  scraper:
+    timeoutMs: 1200   # < 2s exig� au global c�t� endpoint + logique (budget latency) :contentReference[oaicite:3]{index=3}
+    userAgent: "Mozilla/5.0 (compatible; AM-Simulator/1.0)"
+  airdna:
+    baseUrl: "https://api.airdna.co/v1"
+    apiKey: "${AIRDNA_API_KEY:}"
+    defaultOccupancy: 0.70     # taux d?occupation 70% :contentReference[oaicite:4]{index=4}
+    multiplierVsLLD: 3.0       # multiplicateur ~3x :contentReference[oaicite:5]{index=5}
+
+# CORS ouvert pour ton front Angular (� restreindre en prod)
+amcors:
+  allowed-origins: "http://localhost:4200,https://ton-domaine-front"
