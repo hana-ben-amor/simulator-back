@@ -22,6 +22,7 @@ public class SimulationController {
         var sw = System.nanoTime();
         var res = service.simulate(req);
         // Ici tu peux tracer/monitorer pour respecter la contrainte perf globale (<2s côté endpoints). :contentReference[oaicite:13]{index=13}
+        //le temps d’exécution pour vérifier que la simulation reste rapide
         var elapsedMs = (System.nanoTime()-sw)/1_000_000;
         return res;
     }
